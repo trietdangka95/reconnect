@@ -1,4 +1,4 @@
-import jwtDecode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 
 export type DecodedToken = {
   readonly exp: number;
@@ -16,10 +16,11 @@ export class AuthToken {
 
   constructor(readonly token?: string) {
     this.decodedToken = {} as DecodedToken;
+
     try {
       if (token) this.decodedToken = jwtDecode(token);
     } catch (err) {
-      console.error('JWT decode get error', err);
+      console.error("JWT decode get error", err);
     }
   }
 
@@ -41,8 +42,8 @@ export class AuthToken {
 }
 
 export interface LoginForm {
-  UserName: string;
-  Password: string;
+  userId: string;
+  userPassword: string;
 }
 export interface RolesDTO {
   RoleName: string;

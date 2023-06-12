@@ -1,0 +1,20 @@
+export const CSV_EXPORTS = {
+  AssetRegistration: 'Asset-Registration-Report',
+  RECsRegistration: 'RECs-Registration-Report',
+  AccountRegistration: 'Account-Registration-Report',
+  RECsListing: 'RECs-Listing-Report',
+  AccountsPayable: 'Accounts-Payable-Report',
+  AccountsReceivable: 'Accounts-Receivable-Report',
+  RetirementApplications: 'Retirement-Applications-Report',
+  UserProfiles: 'User-Profiles-Report',
+  MySellOrders: 'My-Sell-Orders-Report',
+  MyBuyOrders: 'My-Buy-Orders-Report',
+  Accounts: 'Accounts-Report',
+  AllUserAccount: 'All-User-Account-Report',
+  Assets: 'Assets-Inventory-Report',
+  RecItems: 'Rec-Items-Inventory-Report',
+  MoneyHistories: 'eWallet-Transaction-History-Report',
+  RecTransactionHistory: 'RECs-Transaction-History',
+  Recs: 'Recs-Report',
+  Debt: 'Fees-Report'
+};

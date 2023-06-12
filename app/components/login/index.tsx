@@ -1,8 +1,9 @@
 "use client";
-import { AuthAPI } from "@/app/service/Auth";
-import { AuthToken } from "@/app/service/AuthToken";
+import { AuthAPI } from "@/app/services/Auth";
+import { AuthToken } from "@/app/services/AuthToken";
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-
 const LoginPage = () => {
   const servicesAuthAPI = new AuthAPI();
   const {
@@ -11,10 +12,23 @@ const LoginPage = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const router = useRouter();
+  const pathname = usePathname();
+  useEffect(() => {
+    if (pathname === "/") {
+      sessionStorage.getItem("token")
+        ? router.push("/dashboard")
+        : router.push("/");
+    }
+  }, []);
   const onSubmit = async (loginForm: any) => {
     const { data, error } = await servicesAuthAPI.login(loginForm);
-    const user = data.Token ? new AuthToken(data.Token) : null;
-    console.log(user);
+
+    data &&
+      data.tokenContent &&
+      sessionStorage.setItem("token", data.tokenContent);
+
+    data && router.push("/dashboard");
   };
   return (
     <>
@@ -37,7 +51,7 @@ const LoginPage = () => {
               <div className="mt-2">
                 <input
                   id="email"
-                  {...register("UserName")}
+                  {...register("userId")}
                   autoComplete="email"
                   required
                   className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -64,7 +78,7 @@ const LoginPage = () => {
               </div>
               <div className="mt-2">
                 <input
-                  {...register("Password")}
+                  {...register("userPassword")}
                   id="password"
                   type="password"
                   autoComplete="current-password"

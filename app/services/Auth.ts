@@ -2,9 +2,7 @@ import { IResponse } from "./axios/entities";
 import { catchAxiosError } from "./axios/error";
 import HttpClient from "./axios/instance";
 
-
-
-const Auth = 'Auth';
+const Auth = "admin/auth";
 export class AuthAPI extends HttpClient {
   constructor(token?: string) {
     super({ baseURL: process.env.VITE_APP_DOMAIN_API_SERVER, token });
@@ -12,10 +10,9 @@ export class AuthAPI extends HttpClient {
 
   public login = async (data: any): Promise<IResponse> => {
     const response: IResponse = await this.instance
-      .post(`${Auth}`, data)
+      .post(`${Auth}/login`, data)
       .catch(catchAxiosError);
 
     return response;
   };
-
 }
